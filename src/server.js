@@ -8,6 +8,8 @@ const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+app.use(cors())
+
 const connectedUsers = {}
 
 io.on('connection', client => {
@@ -24,7 +26,6 @@ app.use((request, response, next) => {
 })
 
 app.use(express.json())
-app.use(cors())
 app.use(routes)
 
 server.listen(process.env.PORT, () => console.log('Server running at port', process.env.PORT))
